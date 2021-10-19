@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <!--  -->
-    <?php wp_head(); ?>
-    <!--  -->
-    
-    <title>Puppy University</title>
-</head>
-<body>
+<html <?php language_attributes(); ?>>
+  <head>
+      <!--  -->
+      <meta charset="<?php bloginfo('charset'); ?>"> 
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <?php wp_head(); ?>
+      <!--  -->
+  </head>
+  <body <?php body_class(); ?>> <!-- 페이지마다 다른 class를 body tag에 부여 -->
     <header class="site-header">
       <div class="container">
         <h1 class="school-logo-text float-left">
-          <a href="#"><strong>Fictional</strong> University</a>
+          <a href="<?php echo site_url() ?>"><strong>Fictional</strong> University</a>
         </h1>
         <span class="js-search-trigger site-header__search-trigger"><i class="fa fa-search" aria-hidden="true"></i></span>
         <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
         <div class="site-header__menu group">
           <nav class="main-navigation">
+            <?php
+             /* 
+              wp_nav_menu(array(
+                'theme_location' => 'headerMenuLocation' 
+                // register at functions.php file
+              ));
+              */
+              ?> 
             <ul>
-              <li><a href="#">About Us</a></li>
+              <li <?php if (is_page('about-us') or wp_get_post_parent_id(0) == 12) echo 'class="current-menu-item"' ?>><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
               <li><a href="#">Programs</a></li>
               <li><a href="#">Events</a></li>
               <li><a href="#">Campuses</a></li>
